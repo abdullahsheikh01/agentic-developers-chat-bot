@@ -62,7 +62,8 @@ async def handle_message(message:cl.Message):
     )
 
     msg : cl.Message = cl.Message(content="")
-    await msg.stream_token(f"Working On Query...\n")
+    async for _ in "Working On Query...\n":
+        await msg.stream_token(_)
 
     async for event in result.stream_events():
         if(
@@ -72,7 +73,6 @@ async def handle_message(message:cl.Message):
         ):
             # Response Sending
             await msg.stream_token(event.data.delta)
-    await msg.stream_token(f"\nAgent Used: {result.last_agent.name}")
 
     chat_history.append(
         {
