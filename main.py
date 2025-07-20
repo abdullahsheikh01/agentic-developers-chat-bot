@@ -62,8 +62,8 @@ async def handle_message(message:cl.Message):
     )
 
     msg : cl.Message = cl.Message(content="")
-    async for _ in "Working On Query...\n":
-        await msg.stream_token(_)
+    for _ in "Working on your query...":
+        msg.stream_token(_)
 
     async for event in result.stream_events():
         if(
